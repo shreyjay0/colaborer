@@ -18,7 +18,7 @@
     "mongoose": "^4.8.6",
     "nodemailer": "^3.1.5",
     "serve-favicon": "~2.3.2",
-    "socket.io": "^1.7.3"
+    "socket.io": "^1.7.3",
     "ot": "git+https://github.com/Operational-Transformation/ot.js.git",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
