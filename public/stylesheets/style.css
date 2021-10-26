@@ -3,6 +3,12 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+.auth-bottom-ref {
+  text-decoration: none;
+  margin-left: 6px;
+}
+
+.auth-bottom {
+  display: flex;
+  margin-top: 2em;
 }

@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+    />
+    <title>{{title}}</title>
+
+  </head>
+
+  <body>
+    <div class="row m-0 h-100">
+      <div
+        class="col p-0 text-center d-flex justify-content-center align-items-center display-none"
+      >
+        <img src="#" class="w-90" />
+      </div>
+      <div
+        class="col p-0 bg-custom d-flex justify-content-center align-items-center flex-column w-100"
+      >
+        {{#if err}}
+          {{#each err}}
+            <p class="alert alert-danger" role="alert">
+              {{this.msg}}
+            </p>
+          {{/each}}
+        {{/if}}
+
+        <h1><label class="form-check-label">Register</label></h1>
+        <form class="w-75" action="signup" method="POST">
+          <input type="hidden" name="_csrf" value="{{crfToken}}" />
+          <div class="mb-3">
+            <label for="inp" class="form-label">Name</label>
+            <input
+              type="text"
+              name="name"
+              class="form-control"
+              id="name"
+              placeholder="John Doe"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="inp" class="form-label">Username</label>
+            <input
+              type="text"
+              name="uname"
+              class="form-control"
+              id="uname"
+              placeholder="colaborer"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="inp" class="form-label">Email</label>
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              id="email"
+              placeholder="colaborer@colaborer.com"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="passinp" class="form-label">Password</label>
+            <input type="password" name="pass" class="form-control" id="pass" />
+          </div>
+          <div class="mb-3">
+            <label for="passinp" class="form-label">Confirm Password</label>
+            <input
+              type="password"
+              name="cpass"
+              class="form-control"
+              id="cpass"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-secondary btn-lg btn-block mt-6"
+          >Make me a colaborer!</button>
+        </form>
+        <div class="auth-bottom">
+          Already a colaborer?
+          <a href="/login" class="auth-bottom-ref">Login</a></div>
+      </div>
+    </div>
+  </body>
+
+</html>

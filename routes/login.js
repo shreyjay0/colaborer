@@ -1,50 +1,61 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var passport = require("passport")
+var passport = require("passport");
 
-router.get("/signup", function(req,res,next) {
-    res.render('signup', { title: 'Register a new account'});
+router
+  .route("/signup")
+  .get(function (req, res, next) {
+    res.render("auth/signup", { title: "Register" });
   })
-  .post(function(req, res, next) {
-    req.checkBody('email', 'Email is invalid').isEmail();
-    req.checkBody('uname', 'Fill in your username').notEmpty();
-    req.checkBody('pass', 'Fill in Password').notEmpty();
-    req.checkBody('pass', 'Passwords must be same').equals(req.body.confirmPass).notEmpty();
+  .post(function (req, res, next) {
+    req.checkBody("uname", "Please fill your username").notEmpty();
+    req.checkBody("email", "Email is invalid").isEmail();
+    req.checkBody("name", "Please fill your name").notEmpty();
+    req.checkBody("pass", "Please fill in password").notEmpty();
+    req
+      .checkBody("cpass", "Passwords must be same")
+      .equals(req.body.cpass)
+      .notEmpty();
 
-    var err = req.validationErrors();
+    var err = req.validateEntries();
     if (err) {
-      res.render('signup', {
+      res.render("signup", {
         uname: req.body.uname,
         email: req.body.email,
-        err: err
+        err: err,
       });
     } else {
-      var colaborerr = new User();
-      colaborerr.email = req.body.email;
-      colaborerr.uname = req.body.uname;
-      colaborerr.setPassword(req.body.password);
-      colaborerr.save(function (err) {
+      var colaborer = new Colaborer();
+      colaborer.uname = req.body.uname;
+      colaborer.name = req.body.name;
+      colaborer.email = req.body.email;
+      colaborer.setPassword(req.body.pass);
+      colaborer.save(function (err) {
         if (err) {
-          res.render('signup', {err: err});
+          res.render("auth/signup", { err: err });
         } else {
-          res.redirect('/login');
+          res.redirect("/login");
         }
-      })
+      });
     }
+  });
 
-})
-
-router.get('/login',function(req, res, next) {
-    res.render('login', { title: 'Login'});
+router
+  .route("/login")
+  .get(function (req, res, next) {
+    res.render("auth/login", { title: "Login" });
   })
-  .post(passport.authenticate('local', {
-    failureRedirect: '/login'
-  }), function (req, res) {
-    res.redirect('/');
-  });
+  .post(
+    passport.authenticate("local", {
+      failureRedirect: "/login",
+    }),
+    function (req, res) {
+      res.redirect("/");
+    }
+  );
 
-  router.get('/logout', function (req, res, next) {
-    req.logout();
-    res.redirect('/home');
-  });
+router.get("/logout", function (req, res, next) {
+  req.logout();
+  res.redirect("/home");
+});
 module.exports = router;
