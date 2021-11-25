@@ -8,6 +8,10 @@ var colaborerSchema = new mongoose.Schema({
     unique: true,
     required: true,
   },
+  name: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     unique: true,
@@ -33,4 +37,4 @@ colaborerSchema.methods.validPassword = function (pass) {
 };
 
 //export model
-module.exports = mongoose.model("User", colaborerSchema);
+module.exports = mongoose.model("Colaborer", colaborerSchema);
